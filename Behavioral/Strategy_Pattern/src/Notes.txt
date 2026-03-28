@@ -1,0 +1,29 @@
+Real Backend Upgrade (VERY IMPORTANT)
+In real systems (like Spring Boot), you usually don’t do:
+    new PercentageDiscount(...)
+Instead:
+    You inject strategies
+
+Example:
+@Service
+class CheckoutService {
+
+    private final Map<String, Discount> discountStrategies;
+
+    public CheckoutService(List<Discount> discounts) {
+        this.discountStrategies = discounts.stream()
+            .collect(Collectors.toMap(d -> d.getClass().getSimpleName(), d -> d));
+    }
+
+    public BigDecimal checkout(String discountType, BigDecimal price) {
+        return discountStrategies.get(discountType).applyDiscount(price);
+    }
+}
+
+👉 This is REAL production Strategy pattern.
+
+🧠 Subtle Improvement (Senior-Level Thinking)
+
+You might want to protect against negative prices:
+
+return price.subtract(amount).max(BigDecimal.ZERO);
