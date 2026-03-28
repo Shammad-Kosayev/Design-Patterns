@@ -1,0 +1,17 @@
+Simplifies complex system
+Simplifies access to MULTIPLE objects
+---
+
+🔴 Downsides
+❌ Can become “God class”
+
+If you put too much logic inside.
+
+❌ May hide too much
+
+Sometimes you still need access to subsystems.
+
+---
+
+Controller → Facade(Service) → Repositories / other services
+You are already using Facade pattern daily.

@@ -1,0 +1,54 @@
+🎯 Scenario: Payment System
+You support:
+    Payment types:
+        * One-time payment
+        * Subscription payment
+    Payment providers:
+        * Stripe
+        * PayPal
+
+❌ Without Bridge (Inheritance Explosion)
+class OneTimeStripePayment {
+    void pay() {
+        System.out.println("One-time payment via Stripe");
+    }
+}
+
+class SubscriptionStripePayment {
+    void pay() {
+        System.out.println("Subscription via Stripe");
+    }
+}
+
+class OneTimePaypalPayment {
+    void pay() {
+        System.out.println("One-time payment via PayPal");
+    }
+}
+
+class SubscriptionPaypalPayment {
+    void pay() {
+        System.out.println("Subscription via PayPal");
+    }
+}
+
+🔴 What’s the problem?
+Right now:
+    2 types × 2 providers = 4 classes
+
+Now imagine adding:
+    * ApplePay
+    * GooglePay
+💥 You get:
+    2 × 4 = 8 classes
+Add more types?
+    N × M explosion
+
+🧠 2️⃣ WHY This Happens
+Because you're mixing two independent dimensions:
+    * Dimension 1 → Payment type (what)
+    * Dimension 2 → Provider (how)
+
+Bridge Solution (Step-by-step)
+We separate those dimensions.
+

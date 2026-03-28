@@ -1,0 +1,57 @@
+Proxy Idea:
+Instead of changing the real object, we put another object in front of it.
+Concept:
+Client → Proxy → Real Object
+
+---
+
+🔴 Downsides
+
+❌ Adds extra layer
+❌ Can hide performance costs (lazy loading surprises)
+
+---
+
+Key Difference from Decorator (IMPORTANT):
+Both wrap object.
+Decorator → "add more"
+Proxy → "control usage"
+
+Decorator:
+Adds new behavior (enhancement)
+
+Proxy:
+Controls access (gatekeeper)
+
+---
+
+Types of Proxy (VERY IMPORTANT):
+1) Protection Proxy:
+   Controls access: auth check, roles, permissions
+
+2) Lazy Proxy (Virtual Proxy) (Used for heavy objects.):
+   Creates object only when needed:
+   if (realService == null) {
+       realService = new RealVideoService();
+   }
+3) Logging Proxy:
+   Logs calls.
+4) Remote Proxy:
+   Calls remote service (API client)
+
+---
+
+Real Backend Example (VERY IMPORTANT):
+🔥Spring @Transactional:
+Internally:
+    Client → Proxy → Real Method
+Proxy does:
+    BEGIN TRANSACTION
+    → call method
+    → COMMIT / ROLLBACK
+
+🔥Hibernate Lazy Loading:
+    User user = repository.findById(1);
+But:
+    user.getOrders(); // triggers DB call
+user is actually a proxy ->: Access property → Proxy loads data → returns
