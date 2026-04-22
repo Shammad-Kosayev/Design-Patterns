@@ -1,0 +1,43 @@
+The Core Idea
+Observer =3
+    "when one thing changes, notify others automatically"
+
+Real-Life Analogy
+    YouTube Channel → Subscribers
+    Channel uploads video
+    Subscribers get notified
+    👉 Channel = Subject
+    👉 Subscribers = Observers
+
+Advanced Insight (IMPORTANT)
+Observer has 2 styles:
+    🔹 Push Model
+        observer.onOrderPlaced(orderId);
+    👉 Subject sends data
+    🔹 Pull Model
+        observer.update(this);
+    👉 Observer pulls what it needs
+
+🔥 11️⃣ Problems of Observer
+Be aware:
+    ❌ debugging can be hard
+    ❌ hidden side effects
+    ❌ execution order unclear
+    ❌ can become chaotic
+
+🔥 7️⃣ Real Backend Examples
+1️⃣ Spring Events
+    In Spring Framework:
+
+    @EventListener
+    public void handle(OrderPlacedEvent event) {
+        // react to event
+    }
+2️⃣ Message Brokers
+    Kafka
+    RabbitMQ
+    Producer → publishes event
+    Consumers → listen
+3️⃣ Domain Events (DDD)
+    OrderPlacedEvent
+    UserRegisteredEvent
