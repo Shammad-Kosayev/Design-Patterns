@@ -1,0 +1,51 @@
+🧠 1️⃣ Visitor Core Idea
+    Add new operations to objects
+    WITHOUT changing their classes
+
+❌ 2️⃣ Problem Before Visitor
+🎯 Scenario: File System
+You have:
+   * File
+   * Folder
+Now you want:
+   * Calculate size
+   * Export structure
+   * Compress
+   * Scan viruses
+
+🔴 Problem
+Every new operation:
+    MODIFY ALL classes ❌
+
+✅ 3️⃣ Visitor Solution
+Instead of:
+    putting logic INTO classes ❌
+You:
+    moved logic OUTSIDE into visitors ✅
+
+⚠️ 5️⃣ Visitor Trade-off (VERY IMPORTANT)
+✅ Good when:
+   * object structure is stable
+   * operations change often
+❌ Bad when:
+   * new object types are added frequently
+
+👉 because you must update ALL visitors
+
+🎯 Real Backend Examples
+Compilers
+    AST (Abstract Syntax Tree)
+Rule engines
+    Different rules applied to same objects
+
+3️⃣ Serialization frameworks
+    Different formats:
+    JSON visitor
+    XML visitor
+
+⚠️ Visitor vs Strategy
+Strategy
+    ONE behavior at runtime
+Visitor
+    MANY operations across MANY classes
+
