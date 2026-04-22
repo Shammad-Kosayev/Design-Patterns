@@ -1,0 +1,62 @@
+🧠 1️⃣ Template Method Pattern — Core Idea
+    Define the skeleton of an algorithm,
+    but let subclasses change specific steps
+
+❌ 2️⃣ Problem Before Template Pattern
+//code example
+🎯 Scenario: Data Processing
+You have:
+   * CSV processing
+   * JSON processing
+   * XML processing
+
+🔴 Problems
+❌ duplicated flow
+❌ hard to change pipeline
+❌ logic repeated everywhere
+
+✅ 3️⃣ Template Method Solution
+🔧 Step 1 — Abstract Class (Template)
+🔧 Step 2 — Concrete Implementations
+
+🔥 What Just Happened?
+You moved:
+    algorithm structure → parent class ✅
+    changing parts → child classes ✅
+
+🧠 4️⃣ Important Concepts
+   * Template Method: defines the algorithm order
+   * Hooks (optional overrides): subclasses MAY override
+   * Abstract Steps: subclasses MUST implement
+
+🎯 5️⃣ Real Backend Examples
+1️⃣ Spring Framework
+In Spring Framework:
+   * JdbcTemplate
+   * RestTemplate
+👉 You define small parts
+👉 framework controls flow
+
+2️⃣ Authentication flow
+login():
+    validate input
+    check user
+    generate token
+
+3️⃣ Batch processing
+read → process → write
+
+!!⚠️ Template vs Strategy!!
+Template
+   * Inheritance-based
+   * Fixed algorithm structure
+Strategy
+   * Composition-based
+   * Replace behavior entirely
+
+Template = "steps are fixed, details vary"
+Strategy = "behavior itself varies"
+
+🔥 When to Use Template ?
+When:
+    You have a fixed workflow with small variations
