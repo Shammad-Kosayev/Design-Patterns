@@ -1,0 +1,19 @@
+🧱 1️⃣ Simple Factory (Not an official GoF pattern, but VERY common)
+🧠 Idea
+    Move object creation into one place
+
+❌ Before (bad code)
+🔴 Problem
+    ❌ if/else creation logic everywhere
+    ❌ tightly coupled
+    ❌ hard to extend
+
+✅ Simple Factory
+(good code)
+🧠 Key Insight
+    Centralized object creation
+
+⚠️ Limitation
+    Still uses if/else → not fully extensible
+    violates Open/Closed principle
+
