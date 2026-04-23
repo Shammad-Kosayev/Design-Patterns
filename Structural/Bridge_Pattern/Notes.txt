@@ -18,11 +18,53 @@ BAD EXAMPLE:
 Structure
     Abstraction → has Implementation
 
+❌ BAD CODE (Before Bridge)
+🎯 Scenario
+Payment Types (WHAT):
+   * One-time payment
+   * Subscription payment
+Payment Providers (HOW):
+   * Stripe
+   * PayPal
+(bad code)
+🔴 Why This Is BAD
+❌ 1. Class Explosion
+    PaymentTypes × Providers
+Right now:
+    2 × 2 = 4 classes
+Add:
+   * ApplePay
+   * GooglePay
+💣 Now:
+    2 × 4 = 8 classes
+Add new payment type?
+    N × M explosion 💥
+❌ 2. Duplicate Logic
+Look at these:
+    Stripe logic repeated
+    PayPal logic repeated
+👉 You’ll copy-paste real API calls everywhere
 
-Bridge
-Design flexibility from the start
-Bridge
-Two independent axes
+❌ 3. Hard to Extend
+Add new provider:
+    You must create class for EVERY payment type ❌
+❌ 4. Tight Coupling
+Payment type is tightly bound to provider
+👉 You cannot do:
+    new SubscriptionPayment(Stripe)
+Because that concept doesn’t exist here :(
+
+🧠 What’s the REAL Problem?
+You mixed two independent dimensions:
+    WHAT → Payment Type
+    HOW → Payment Provider
+
+🔥 What Bridge Will Fix (Preview)
+
+Instead of:
+    SubscriptionStripePayment ❌
+You’ll have:
+    SubscriptionPayment + StripeProvider ✅
 
 🔴 When You SHOULD Use Bridge
 When you see:
