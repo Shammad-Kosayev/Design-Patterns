@@ -1,0 +1,72 @@
+🧠 1️⃣ Core Idea
+Chain of Responsibility =
+    "pass request through a chain of handlers
+     until one handles it (or all process it)"
+
+👉 Think:
+    Request → Handler1 → Handler2 → Handler3
+Each handler decides:
+    "handle it OR pass it forward"
+
+⚠️ 9️⃣ Downsides
+    ❌ debugging harder
+    ❌ order matters a LOT
+    ❌ can be hard to trace
+
+🧠 When to Use It
+    When:
+        Request must go through multiple independent steps
+
+❌ 2️⃣ Problem Before CoR
+🎯 Scenario: good_code.Request Validation
+You need:
+   * Auth check
+   * Role check
+   * Data validation
+
+(Bad code is in example)
+
+🔴 Problems
+    ❌ everything in one class
+    ❌ hard to extend
+    ❌ violates Open/Closed
+    ❌ no flexibility in order
+
+✅ 3️⃣ Chain of Responsibility Solution
+(in example)
+
+
+🧠 5️⃣ Mental Model
+Each handler:
+    checks something
+    then passes to next
+
+Unlike Strategy:
+    Strategy → ONE chosen
+Chain:
+    Chain → MANY executed in order
+
+Chain vs Decorator:
+* Decorator
+    "adds behavior around same object"
+* Chain
+    "passes request through multiple handlers"
+Looks similar, but:
+    Decorator = wrapping
+    Chain = sequencing
+
+🎯 Real Backend Examples:
+    1️⃣ Spring Security Filter Chain
+    In Spring Security:
+        "Filter1 → Filer2 → Filter3"
+    * authentication
+    * authorization
+    * csrf
+
+    2️⃣ Servlet Filters
+        Request → Filter → Filter → Controller
+
+    3️⃣ Logging pipelines
+        Request → Logging → Metrics → Tracing
+
+    4️⃣ Exception handling chains
