@@ -1,0 +1,32 @@
+🔴 Why This Is BAD
+❌ 1. No Common Abstraction
+    "File ≠ Directory"
+👉 You can't treat them uniformly
+
+❌ 2. Violates Open/Closed Principle
+Add new type:
+   * ShortcutFile
+   * CompressedFolder
+👉 You must modify logic everywhere
+
+❌ 3. Type Checking Hell
+    instanceof → cast → chaos
+example special case
+if item instanceof CompressedFolder compressedFolder {
+    compressedFolder.decompress().getSize();  //cannot use getSize directly, because its compressed
+}
+
+❌ 4. Code Duplication
+Every operation must:
+   * handle File
+   * handle Directory
+
+❌ 5. Hard to Extend
+Add operation:
+   * move()
+   * copy()
+   * compress()
+👉 duplicate logic again and again
+
+❌ 6. Not Scalable Structure
+    ❌ You’re manually managing tree structure logic.

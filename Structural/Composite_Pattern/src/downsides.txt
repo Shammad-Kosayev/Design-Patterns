@@ -1,0 +1,8 @@
+❌ Harder to restrict behavior
+Example:
+    File should NOT have children
+👉 But interface doesn’t enforce it strongly
+
+❌ Debugging recursion can be tricky
+
+❌ Over-generalization risk
