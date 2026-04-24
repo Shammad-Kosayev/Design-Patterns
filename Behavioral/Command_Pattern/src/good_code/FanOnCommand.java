@@ -1,6 +1,6 @@
 package good_code;
 
-public class FanOnCommand {
+public class FanOnCommand implements Command {
 
     private Fan fan;
 
