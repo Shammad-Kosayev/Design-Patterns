@@ -1,0 +1,23 @@
+🔴 WHY THIS IS BAD (Match Your Style)
+❌ 1. if-else Explosion
+    Every new discount → new condition ❌
+
+❌ 2. Violates Open/Closed Principle
+    Add new discount →
+        modify existing method ❌
+
+❌ 3. Hard to Maintain
+    All logic in one place ❌
+    Huge method ❌
+
+❌ 4. No Reusability
+    Cannot reuse "percentage logic" elsewhere ❌
+
+❌ 5. Hard to Test
+    You must test ALL branches in one method ❌
+
+❌ 6. Tight Coupling
+    Business logic depends on string values ❌
+
+❌ 7. Error-Prone
+    "PERCENTAGE" typo → runtime bug 💀

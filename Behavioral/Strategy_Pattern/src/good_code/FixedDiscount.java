@@ -1,3 +1,5 @@
+package good_code;
+
 import java.math.BigDecimal;
 
 public class FixedDiscount implements Discount {

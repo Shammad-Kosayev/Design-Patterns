@@ -1,8 +1,10 @@
+package good_code;
+
 import java.math.BigDecimal;
 
 public class PercentageDiscount implements Discount{
 
-    private final BigDecimal percentage; // e.g. 10 for 10%
+    private final BigDecimal percentage;
 
     public PercentageDiscount(BigDecimal percentage) {
         this.percentage = percentage;
