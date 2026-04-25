@@ -1,0 +1,20 @@
+🔴 Why This Is BAD:
+❌ 1. Class Explosion
+    N payment types × M providers
+❌ 2. Duplicate Logic
+    Logic repeated everywhere ❌
+
+❌ 3. Violates Open/Closed Principle
+Add new provider:
+    Modify ALL payment types ❌
+
+❌ 4. Tight Coupling
+    Payment type is tied to provider
+👉 You cannot dynamically switch provider, you must know which one to use
+
+❌ 5. Hard to Test
+    mocking Stripe everywhere
+    repeated setup
+
+❌ 6. No Runtime Flexibility
+👉 because design doesn’t allow it

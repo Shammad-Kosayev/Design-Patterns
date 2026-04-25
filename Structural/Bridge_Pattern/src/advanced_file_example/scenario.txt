@@ -1,0 +1,16 @@
+🎯 Problem Setup
+
+You have:
+
+File Types (WHAT)
+   * Audio
+   * Video
+Storage Providers (WHERE)
+   * Local
+   * Cloud
+Compression Types (HOW)
+   * None
+   * Zip
+
+(Spoiler)
+👉 That’s 3 independent dimensions, but instead of separating them… we combine them.

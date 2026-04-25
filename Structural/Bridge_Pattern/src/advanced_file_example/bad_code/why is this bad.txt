@@ -1,0 +1,28 @@
+🔴 WHY THIS IS BAD
+❌ 1. Massive Class Explosion
+    FileType × Storage × Compression
+    2 × 2 × 2 = 8 classes
+    → grows exponentially 💣
+
+❌ 2. Duplicate Logic Everywhere
+    Validation logic duplicated ❌
+    Compression logic duplicated ❌
+    Storage logic duplicated ❌
+
+❌ 3. Violates Open/Closed Principle
+Add new compression:
+    → modify ALL combinations ❌
+
+❌ 4. Tight Coupling
+    File type is tightly bound to storage & compression
+👉 You cannot dynamically combine them
+
+❌ 5. No Runtime Flexibility
+👉 because design doesn't allow it
+
+❌ 6. Hard to Test
+    must test every combination
+    mocking becomes repetitive
+
+❌ 7. Unmaintainable Growth
+Adding 1 feature = touching MANY classes ❌

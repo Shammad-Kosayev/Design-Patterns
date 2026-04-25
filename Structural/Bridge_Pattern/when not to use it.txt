@@ -1,0 +1,4 @@
+🚫 8️⃣ When NOT to Use It
+    ❌ Only one dimension exists
+    ❌ No risk of explosion
+    ❌ Simple CRUD system

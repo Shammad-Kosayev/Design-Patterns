@@ -9,62 +9,13 @@ Bridge Idea:
 Core Concept
     Instead of inheritance → use composition
 
-BAD EXAMPLE:
-    Email, UrgentEmail
-    SMS, UrgentSMS
-    Push, UrgentPush
-    Slack, UrgentSlack
+EXAMPLE:
+           Payment (Abstraction)            +          PaymentProvider (Implementation)
+           /                 \                              /     \
+ OneTimePayment      SubscriptionPayment                Stripe   PayPal
 
 Structure
     Abstraction → has Implementation
-
-❌ BAD CODE (Before Bridge)
-🎯 Scenario
-Payment Types (WHAT):
-   * One-time payment
-   * Subscription payment
-Payment Providers (HOW):
-   * Stripe
-   * PayPal
-(bad code)
-🔴 Why This Is BAD
-❌ 1. Class Explosion
-    PaymentTypes × Providers
-Right now:
-    2 × 2 = 4 classes
-Add:
-   * ApplePay
-   * GooglePay
-💣 Now:
-    2 × 4 = 8 classes
-Add new payment type?
-    N × M explosion 💥
-❌ 2. Duplicate Logic
-Look at these:
-    Stripe logic repeated
-    PayPal logic repeated
-👉 You’ll copy-paste real API calls everywhere
-
-❌ 3. Hard to Extend
-Add new provider:
-    You must create class for EVERY payment type ❌
-❌ 4. Tight Coupling
-Payment type is tightly bound to provider
-👉 You cannot do:
-    new SubscriptionPayment(Stripe)
-Because that concept doesn’t exist here :(
-
-🧠 What’s the REAL Problem?
-You mixed two independent dimensions:
-    WHAT → Payment Type
-    HOW → Payment Provider
-
-🔥 What Bridge Will Fix (Preview)
-
-Instead of:
-    SubscriptionStripePayment ❌
-You’ll have:
-    SubscriptionPayment + StripeProvider ✅
 
 🔴 When You SHOULD Use Bridge
 When you see:
@@ -83,21 +34,4 @@ With Bridge:
 
 Bad → class for every combination
 Good → combine objects at runtime
-
-⚠️ 9️⃣ Common Mistake
-People think:
-Bridge = just interface + implementation
-❌ NO
-👉 Real Bridge is:
-    Abstraction HAS Implementation
-That’s the key line:
-    protected PaymentProvider provider;
-
-❗ 8️⃣ Why NOT Just Use Interface?
-You said:
-“we can generalize them”
-👉 That only solves polymorphism, not combinatorial explosion.
-
-🧠 Mental Model (Lock This)
-Abstraction holds Implementation
 

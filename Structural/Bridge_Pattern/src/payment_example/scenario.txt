@@ -1,0 +1,34 @@
+🎯 Scenario: Payment System
+You support:
+    Payment types:
+        * One-time payment
+        * Subscription payment
+    Payment providers:
+        * Stripe
+        * PayPal
+
+🔴 What’s the problem?
+Right now:
+    2 types × 2 providers = 4 classes
+
+Now imagine adding:
+    * ApplePay
+    * GooglePay
+💥 You get:
+    2 × 4 = 8 classes
+Add more types?
+    N × M explosion
+
+🧠 2️⃣ WHY This Happens
+Because you're mixing two independent dimensions:
+    * Dimension 1 → Payment type (what)
+    * Dimension 2 → Provider (how)
+
+Bridge Solution (Step-by-step)
+We separate those dimensions.
+
+🔥 What Bridge Will Fix (Preview)
+Instead of:
+    SubscriptionStripePayment ❌
+You’ll have:
+    SubscriptionPayment + StripeProvider ✅
