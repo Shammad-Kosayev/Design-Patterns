@@ -1,4 +1,4 @@
-package good_code;
+package good_code.push_model;
 
 public class WarehouseService implements OrderObserver{
 

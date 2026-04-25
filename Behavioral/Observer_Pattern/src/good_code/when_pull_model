@@ -1,0 +1,14 @@
+🔥 When Pull Model Is Useful
+✅ 1. Different observers need different data
+    Email → needs email + orderId
+    Warehouse → needs items
+    Analytics → needs everything
+✅ 2. Avoid sending too much data
+    Push → may over-send ❌
+    Pull → observer decides ✅
+
+⚠️ Trade-offs
+❌ Tighter coupling
+    Observer now depends on Subject
+❌ Harder to understand flow
+❌ Risk of multiple data calls

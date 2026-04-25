@@ -1,0 +1,7 @@
+Key Difference (Quick Reminder)
+Push model:
+    Subject → sends DATA to observers
+
+Pull model:
+    Subject → sends ITSELF
+    Observer → pulls what it needs

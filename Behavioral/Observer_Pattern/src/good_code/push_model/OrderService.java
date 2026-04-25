@@ -1,4 +1,4 @@
-package good_code;
+package good_code.push_model;
 
 import java.util.ArrayList;
 import java.util.List;
