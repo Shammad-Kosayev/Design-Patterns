@@ -1,0 +1,19 @@
+🎯 Scenario: E-Commerce System (Backend)
+You are building something like:
+   * AliBaba
+   * Temu
+   * Trendyol
+
+You have:
+   * Product
+   * Bundle (items that cant be sold separately)
+
+And you need operations like:
+   * get price
+
+Order
+ ├── Product 1
+ ├── Product 2
+ └── Bundle 1
+        ├── Product 3
+        └── Product 4

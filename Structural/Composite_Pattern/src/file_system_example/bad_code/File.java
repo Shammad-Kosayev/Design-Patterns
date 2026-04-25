@@ -14,7 +14,7 @@ public class File {
     }
 
     public void delete() {
-        // delete logic
+        // delete logic (OS level)
         System.out.println("Deleted file: " + name);
     }
 }

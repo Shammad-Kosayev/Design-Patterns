@@ -1,6 +1,5 @@
 package file_system_example.bad_code;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Directory {
@@ -8,6 +7,7 @@ public class Directory {
     private String name;
     private List<File> files;
     private List<Directory> directories;
+    // if another type exists, it must be added here as list (look at why is it bad . txt)
 
     public Directory(String name, List<File> files, List<Directory> directories) {
         this.name = name;
@@ -37,6 +37,10 @@ public class Directory {
         for (Directory dir : directories) {
             dir.delete();
         }
+
+        // if another type exists, must add another for loop here
+
+        // folder delete logic (OS level)
 
         System.out.println("Deleting directory: " + name);
     }

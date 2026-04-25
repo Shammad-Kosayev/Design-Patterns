@@ -1,4 +1,4 @@
-package e_commerce_example;
+package e_commerce_example.good_code;
 
 //Leaf (Single Product)
 public class Product implements OrderItem{
