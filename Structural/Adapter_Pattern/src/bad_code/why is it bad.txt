@@ -1,0 +1,31 @@
+🔴 WHY THIS IS BAD
+
+❌ 1. Service Knows Too Much
+    CheckoutService is forced to know HOW to talk to Stripe ❌
+    (cents conversion, currency, request building, response unwrapping)
+
+❌ 2. Two Different "Languages" In One Class
+    LocalPaymentProcessor.pay(double, String)              — your style
+    StripeClient.charge(StripeChargeRequest) → Response    — Stripe's style
+    Service is forced to mix both ❌
+
+❌ 3. Violates Open/Closed Principle
+    Add PayPal?     → new constructor param + new else-if ❌
+    Add ApplePay?   → new constructor param + new else-if ❌
+    Class keeps growing every time the business adds a provider 💀
+
+❌ 4. Translation Logic Has No Home
+    "dollars × 100", "USD" hard-coded, response.isSucceeded() unwrap…
+    All of it lives inside the business service ❌
+    If Stripe later changes its SDK → service must change too ❌
+
+❌ 5. Hard To Test
+    Mocking StripeClient AND LocalProcessor inside one service ❌
+    Every test has to set up both, even if it only tests one path.
+
+❌ 6. Tight Coupling To Third-Party Code
+    Service depends on Stripe's *types* directly (StripeChargeRequest etc.) 💀
+    Swap Stripe → ripple change everywhere that imports those types.
+
+❌ 7. Provider Strings Are Fragile
+    "STRIPE" typo → silent runtime failure ❌

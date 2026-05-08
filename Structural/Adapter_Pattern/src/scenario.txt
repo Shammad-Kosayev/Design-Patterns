@@ -1,0 +1,52 @@
+🎯 Scenario: Integrating a Third-Party Payment SDK
+
+You already have:
+    Your own interface         → PaymentProcessor   (the way YOUR app talks)
+    Your own implementation    → LocalPaymentProcessor
+
+Then management says:
+    "We need to support Stripe."
+
+So you pull in Stripe's SDK:
+    StripeClient.charge(StripeChargeRequest request) : StripeChargeResponse
+                                  ↑
+        Totally different shape:
+            * needs a request object (not just a number)
+            * uses cents (not dollars)
+            * returns its own response type
+            * throws its own exceptions
+
+🔴 The Problem
+You CANNOT modify Stripe's SDK ❌
+    (it's a third-party library — you don't own it)
+You CANNOT change every place in your code that already uses PaymentProcessor ❌
+    (touching it would mean rewriting half your app)
+
+So how do you make Stripe "fit" into your system?
+
+🧠 Adapter Idea
+Wrap Stripe's SDK in a class that:
+    * implements YOUR interface (PaymentProcessor)
+    * internally calls Stripe's API the way IT wants
+
+           Your code → PaymentProcessor (your interface)
+                              ▲
+                              | implements
+                              |
+                       StripePaymentAdapter
+                              |
+                              | wraps & translates
+                              ▼
+                        StripeClient (third-party)
+
+🔥 What Adapter Will Fix (Preview)
+Instead of:
+    if (provider.equals("STRIPE")) {
+        long cents = (long)(dollars * 100);
+        StripeChargeRequest req = new StripeChargeRequest(cents, "USD", id);
+        StripeChargeResponse resp = stripeClient.charge(req);
+        ...
+    } ❌
+You'll have:
+    paymentProcessor.pay(amount, customerId) ✅
+    (and "paymentProcessor" can secretly be the Stripe adapter)

@@ -1,0 +1,56 @@
+🧠 Adapter Pattern — Senior-Level Notes
+
+🔑 Core Idea
+    "Make a class with a different shape look like the shape YOU want."
+    Adapter = translator between two incompatible interfaces.
+
+📐 Two Flavors
+   1️⃣ Object Adapter (used here)
+       Adapter HAS-A target object → calls it via composition.
+       Most common in Java. More flexible.
+
+   2️⃣ Class Adapter
+       Adapter EXTENDS the target class.
+       Java doesn't allow multi-inheritance, so this is rarely used.
+       In languages with multi-inheritance (e.g. C++) it shows up more.
+
+🏭 Real Backend Upgrade (Spring Boot style)
+    @Component("stripe")
+    class StripePaymentAdapter implements PaymentProcessor { ... }
+
+    @Component("local")
+    class LocalPaymentProcessor implements PaymentProcessor { ... }
+
+    @Service
+    class CheckoutService {
+
+        private final Map<String, PaymentProcessor> processors;
+
+        CheckoutService(Map<String, PaymentProcessor> processors) {
+            this.processors = processors;     // Spring auto-wires by bean name
+        }
+
+        public boolean checkout(String provider, double amount, String customerId) {
+            return processors.get(provider).pay(amount, customerId);
+        }
+    }
+    👉 You inject ALL adapters and pick the right one by name.
+    👉 This is how real production code uses Adapter at scale.
+
+🛡️ What Real Adapters ALSO Do (skipped here for clarity)
+   * Translate exceptions:
+        catch (StripeException) → throw your own PaymentFailedException
+   * Map status codes:
+        Stripe's "succeeded" / "requires_action" → your enum
+   * Convert units:
+        cents ↔ dollars, kg ↔ lbs, ISO date ↔ epoch ms
+   * Hide quirks of the foreign API:
+        pagination, rate-limit headers, idempotency keys, etc.
+
+🚫 When NOT to Use Adapter
+    ❌ You control BOTH sides of the interface
+        → just align them, no adapter needed
+    ❌ Only one place uses the foreign API
+        → maybe inline conversion is fine
+    ❌ You are designing two parallel hierarchies from scratch
+        → Bridge fits better (see alternative/Notes.txt)
