@@ -1,0 +1,61 @@
+🎯 Scenario: Coffee Shop Order System
+
+A different domain from the Notification example you already have.
+👉 Same pattern, fresh angle — to lock in the idea.
+
+You sell drinks:
+    Base drinks       → Espresso, Latte, Americano
+    Add-ons (toppings) → Milk, Sugar, Caramel, Whipped Cream
+
+A customer can order ANY combination:
+    "Latte + milk + caramel + whipped cream"
+    "Espresso + sugar + sugar"   (yes, double sugar)
+    "Americano + milk"
+
+🔴 What's the problem?
+Each add-on changes:
+    * the PRICE       (cost goes up)
+    * the DESCRIPTION (printed receipt)
+
+Naive approaches:
+   1️⃣ One class per combination
+        EspressoWithMilk, EspressoWithMilkAndSugar,
+        LatteWithCaramelAndWhippedCream …
+        → class explosion 💣 (M drinks × 2^N add-ons)
+
+   2️⃣ One class with boolean flags
+        new Coffee(milk=true, sugar=true, caramel=false, ...)
+        → "telescoping constructor" + if/else mess inside cost() / describe()
+
+Both BREAK as soon as you add the next add-on.
+
+🧠 Decorator Idea
+Wrap a beverage in another beverage.
+
+    Beverage base = new Latte();
+    base = new MilkDecorator(base);
+    base = new CaramelDecorator(base);
+    base = new WhippedCreamDecorator(base);
+
+Each decorator IS-A Beverage AND HAS-A Beverage.
+    cost()     → adds its own price on top of the wrapped one
+    describe() → adds its own name on top of the wrapped one
+
+           Beverage (interface)
+                ▲
+                |
+       ┌────────┼────────────────┐
+       |                         |
+   Espresso (concrete)     BeverageDecorator (abstract)
+                                 ▲
+                  ┌──────────────┼──────────────┐
+              MilkDecorator   SugarDecorator   CaramelDecorator
+                  |               |                |
+                  └──── all wrap another Beverage ─┘
+
+🔥 What Decorator Will Fix (Preview)
+Instead of:
+    new EspressoWithMilkAndSugar()                          ❌
+    new Coffee(milk=true, sugar=true, caramel=false, ...)   ❌
+You'll have:
+    new SugarDecorator(new MilkDecorator(new Espresso()))   ✅

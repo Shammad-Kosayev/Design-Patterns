@@ -1,0 +1,46 @@
+🧠 Decorator Pattern — Senior-Level Notes
+
+🔑 Core Idea
+    "Wrap an object in another object that ADDS behavior, without changing the wrapped one."
+    Each decorator IS-A T and HAS-A T.
+
+📐 Why Wrapping Beats Inheritance Here
+    Inheritance fixes behavior at COMPILE TIME (one chain, one set of features).
+    Decorators compose behavior at RUNTIME (any combination, any order).
+
+🔁 Order Can Matter!
+    new SugarDecorator(new MilkDecorator(base))
+    vs.
+    new MilkDecorator(new SugarDecorator(base))
+
+    For cost & describe → no difference (just addition / concatenation).
+    For OTHER decorators (logging, encryption, retries) → order changes the result. 💀
+    Real-world rule: think about ordering when each decorator transforms a value.
+
+🏭 Real-World Decorators You Already Use
+    1️⃣ Java I/O streams
+        new BufferedReader(new InputStreamReader(new FileInputStream("x.txt")));
+        Each layer is a decorator on the previous one. 🎯
+
+    2️⃣ Spring AOP
+        @Transactional, @Cacheable, @Retryable, @Async
+        At runtime Spring wraps your bean in proxies — those proxies are decorators
+        adding cross-cutting behavior.
+
+    3️⃣ HTTP clients
+        Authentication interceptor → Logging interceptor → Retry interceptor → real call
+        (You'll see this pattern in OkHttp, Axios, Express middleware.)
+
+⚠️ Decorator vs Proxy (Common Confusion)
+    Both wrap an object. Different INTENT:
+        Decorator → "ADD behavior"        (enhancement)
+        Proxy     → "CONTROL access"      (gatekeeping, lazy loading, remoting)
+    Same shape on a UML diagram. The intent is what differentiates them.
+
+🚫 When NOT to Use Decorator
+    ❌ Only one or two combinations exist
+        → just write them as concrete classes
+    ❌ The "add-ons" need to know about each other
+        → decorators are independent by design; coupled features fight this
+    ❌ The interface has too many methods
+        → every decorator must override every method = boilerplate hell
